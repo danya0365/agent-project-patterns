@@ -1,127 +1,115 @@
-# @dan/project-patterns
+# 🤖 @dan/agent-skills
 
-CLI tool สำหรับ scaffold Clean Architecture patterns เข้าโปรเจค Next.js
+เครื่องมือ CLI สำหรับจัดการและติดตั้ง **AI Agent Patterns & Skills** เข้าสู่โปรเจค Next.js ของคุณ เพื่อให้ AI (เช่น Cursor, Claude, หรือ ChatGPT) เข้าใจมาตรฐานโค้ด (Clean Architecture) และช่วยเขียนโค้ดได้แม่นยำยิ่งขึ้น ✨
 
-## ติดตั้ง
+---
 
+## 🚀 การติดตั้งและใช้งาน (Local Development)
+
+เนื่องจากโปรเจคนี้อยู่ในเครื่องของคุณ คุณสามารถเรียกใช้งานในโปรเจคอื่นๆ ได้ 2 วิธี:
+
+### วิธีที่ 1: ใช้ `npm link` (แนะนำ)
+วิธีนี้จะทำให้คุณพิมพ์คำสั่ง `agent-skills` ได้จากทุกที่ในเครื่อง:
+1. เข้าไปที่โฟลเดอร์โปรเจคนี้:
+   ```bash
+   cd /Users/marosdeeuma/agent-project-patterns
+   npm link
+   ```
+2. ไปยังโปรเจคที่คุณต้องการใช้งาน (เช่น `ai-content-creator-nextjs`):
+   ```bash
+   cd /Users/marosdeeuma/ai-content-creator-nextjs
+   agent-skills init
+   ```
+
+### วิธีที่ 2: ใช้ `npx` (ไม่ต้องติดตั้งเข้าระบบ)
+เหมาะสำหรับการเรียกใช้งานแบบครั้งเดียว:
 ```bash
-# ใช้แบบ global (แนะนำ)
-npm install -g @dan/project-patterns
-
-# หรือใช้แบบ npx (ไม่ต้องติดตั้ง)
-npx @dan/project-patterns init
-```
-
-## การใช้งาน
-
-### `init` — Copy ทุก pattern เข้าโปรเจค
-
-```bash
-cd my-nextjs-project
-
-# Interactive (ถามว่าจะเก็บไว้ที่ไหน)
-project-patterns init
-
-# เก็บใน .cursor/rules/ (default)
-project-patterns init -y
-
-# กำหนด destination เอง
-project-patterns init -d .claude
-project-patterns init -d docs/patterns
-
-# Overwrite ไฟล์ที่มีอยู่แล้ว
-project-patterns init --force
-```
-
-### `add` — Copy pattern เฉพาะอัน
-
-```bash
-# Interactive (เลือก pattern)
-project-patterns add
-
-# ระบุ pattern ID โดยตรง
-project-patterns add page
-project-patterns add repo
-```
-
-### `check` — เช็คว่า patterns up-to-date ไหม
-
-```bash
-project-patterns check
-```
-
-ตัวอย่าง output:
-```
-📁 .cursor/rules/
-   ✓ CREATE_PAGE_PATTERN.md  up to date
-   ! CREATE_REPO_PATTERN.md  outdated
-```
-
-### `update` — อัปเดต patterns ที่ล้าสมัย
-
-```bash
-project-patterns update
-```
-
-### `list` — ดู patterns ทั้งหมดที่มี
-
-```bash
-project-patterns list
+npx /Users/marosdeeuma/agent-project-patterns init
 ```
 
 ---
 
-## Workflow ที่แนะนำ
+## 🛠️ คำสั่งการใช้งาน (Commands)
 
-### 1. สร้างโปรเจคใหม่
-
+### 1. `init` — ติดตั้ง Patterns ทั้งหมด
+คัดลอกไฟล์มาตรฐาน (Pages, Repositories, etc.) เข้าสู่โปรเจคของคุณ
 ```bash
-npx create-next-app my-app
-cd my-app
-project-patterns init -y   # → .agent/CREATE_PAGE_PATTERN.md
-                            # → .agent/CREATE_REPO_PATTERN.md
+# แบบปกติ (จะมีถามว่าจะเก็บไว้โฟลเดอร์ไหน)
+agent-skills init
+
+# แบบข้ามคำถาม (ติดตั้งลง .cursor/rules/ ทันที)
+agent-skills init -y
+
+# กำหนดโฟลเดอร์ปลายทางเอง
+agent-skills init -d .agent
 ```
 
-`.agent/` จะถูกอ่านโดย AI agent context ✨
-
-### 2. เมื่อ update pattern ใน package
-
+### 2. `add [id]` — เพิ่มบาง Pattern
+เลือกติดตั้งเฉพาะอย่างที่คุณต้องการ
 ```bash
-# แก้ไขไฟล์ใน patterns/
-# แล้ว bump version
-npm version patch
+# เลือกจากรายการ (Interactive)
+agent-skills add
 
-# อัปเดตทุกโปรเจค
-cd ~/projects/my-app && project-patterns update
-cd ~/projects/other-app && project-patterns update
+# ระบุ ID โดยตรง
+agent-skills add page
+agent-skills add repo
+```
+
+### 3. `check` — ตรวจสอบเวอร์ชัน
+เช็คว่าไฟล์ในโปรเจคของคุณล้าสมัยกว่าตัวต้นฉบับในเครื่องหรือไม่
+```bash
+agent-skills check
+```
+
+### 4. `update` — อัปเดตไฟล์ให้เป็นปัจจุบัน
+```bash
+agent-skills update
 ```
 
 ---
 
-## เพิ่ม pattern ใหม่
+## 📂 โครงสร้างที่สร้างให้ AI
 
-แก้ไข `src/registry.js`:
+เมื่อรันคำสั่ง `init` ตัวโปรแกรมจะสร้างโฟลเดอร์ปลายทาง (เช่น `.cursor/rules/`) ซึ่งด้านในจะมี:
 
-```js
-export const PATTERNS = [
-  // ... existing
-  {
-    id: 'api-route',
-    name: 'CREATE_API_ROUTE_PATTERN.md',
-    description: 'Next.js API Route pattern with auth + validation',
-    file: 'CREATE_API_ROUTE_PATTERN.md',
-    tags: ['api', 'route', 'auth'],
-  },
-];
-```
+- `SKILL.md`: ไฟล์หลักที่ AI Agent จะอ่านเพื่อเรียนรู้วิธีการเขียนโค้ด (Rules & Patterns)
+- `references/`: ไฟล์ตัวอย่างหรือคู่มือฉบับเต็มที่ AI สามารถเข้าไปอ่านเพิ่มเติมได้
 
-แล้วเพิ่มไฟล์ `patterns/CREATE_API_ROUTE_PATTERN.md` — เสร็จเลย
+**เหตุผลที่ต้องมีสิ่งนี้:** 
+ช่วยให้ AI ไม่เขียนโค้ดมั่วซั่ว และทำตามมาตรฐาน **Clean Architecture** ที่คุณกำหนดไว้เสมอ!
 
 ---
 
-## Patterns ที่มี
+## 🔄 การอัปเดตและซิงค์ Patterns (Sync & Update)
 
-| ID | ไฟล์ | คำอธิบาย |
-|----|------|----------|
-| `page` | CREATE_PAGE_PATTERN.md | Clean Architecture page (Repository → Presenter → View) |
-| `repo` | CREATE_REPO_PATTERN.md | Repository pattern (Interface → Mock → Supabase → API) |
+หากมีการแก้ไขไฟล์ในโฟลเดอร์ `patterns/` ของโปรเจคต้นฉบับ คุณสามารถอัปเดตโปรเจคอื่นๆ ได้ง่ายๆ ดังนี้:
+
+### 1. ตรวจสอบเวอร์ชัน
+เข้าไปที่โปรเจคที่ติดตั้ง Patterns ไว้แล้วรันคำสั่ง:
+```bash
+agent-skills check
+```
+*ระบบจะเปรียบเทียบเนื้อหาไฟล์ในโปรเจคกับต้นฉบับ หากไม่ตรงกันจะขึ้นเครื่องหมาย `!` (Outdated)*
+
+### 2. ทำการอัปเดต
+รันคำสั่งเพื่อคัดลอกไฟล์ใหม่จากต้นฉบับมาเขียนทับไฟล์เดิม:
+```bash
+agent-skills update
+```
+
+---
+
+## 📝 รายการ Patterns ที่มีจำหน่าย (Registry)
+
+| ID | ชื่อไฟล์ | คำอธิบาย |
+|----|----------|----------|
+| `page` | `CREATE_PAGE_PATTERN.md` | โครงสร้าง Page (Repository → Presenter → View) |
+| `repo` | `CREATE_REPO_PATTERN.md` | โครงสร้าง Data Layer (Interface → Implementation) |
+
+---
+
+## 💡 สำหรับนักพัฒนา (How to add new pattern)
+
+1. เพิ่มไฟล์ Markdown ของคุณในโฟลเดอร์ `patterns/`
+2. ลงทะเบียนไฟล์นั้นใน `src/registry.js`
+3. ทดสอบเรียกใช้ด้วย `agent-skills list`
