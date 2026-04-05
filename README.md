@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://img.icons8.com/color/96/robot-2.png" alt="Logo" width="80" />
   <h1>@dan/agent-patterns</h1>
-  <p><b>Standardize your AI-driven development with Clean Architecture Patterns</b></p>
+  <p><b>Standardize your AI-driven development with the Agent Skills standard</b></p>
 
   <p>
     <a href="https://www.npmjs.com/package/@dan/agent-patterns"><img src="https://img.shields.io/npm/v/@dan/agent-patterns.svg?style=flat-square" alt="NPM Version" /></a>
@@ -16,19 +16,19 @@
 ## 🌟 Overview (ความเป็นมา)
 
 **The Problem:** AI Coding Agents (like Cursor, Claude, or ChatGPT) often generate messy, inconsistent code if not given clear architectural rules.
-**The Solution:** `@dan/agent-patterns` provides a CLI to inject standardized **Clean Architecture** patterns directly into your project's AI context.
+**The Solution:** `@dan/agent-patterns` provides a CLI to inject standardized **Agent Skills** directly into your project.
 
 > [!TIP]
-> This tool ensures your AI assistant always follows your established Repository-Presenter-View patterns.
+> This tool follows the **Industry Standard** for Agent Skills, making it 100% compatible with desktop managers like [chrlsio/agent-skills](https://github.com/chrlsio/agent-skills).
 
 ---
 
 ## ✨ Features (จุดเด่น)
 
-- 🏗️ **Clean Architecture Scout:** Scaffold standardized structures in seconds.
-- 🤖 **AI-Native:** Designed specifically for IDEs like Cursor (`.cursor/rules`) and Claude (`.claude/patterns`).
-- 🔄 **One-Click Sync:** Keep patterns across all your projects up-to-date with a single command.
-- 🛠️ **Local-First:** Optimized for developers who want to manage their own local pattern library.
+- 🏗️ **Standard Compliant:** Follows the open standard (`.agents/skills/` + `SKILL.md`).
+- 🤖 **Universal Support:** Works with Antigravity, Windsurf, Cursor, Claude Code, and more.
+- 🔄 **One-Click Sync:** Keep skills across all your projects up-to-date with a single command.
+- 🛠️ **Local-First:** Optimized for developers who want to manage their own local skill library.
 - 🇹🇭 **Bi-lingual Support:** Excellent documentation in both English and Thai.
 
 ---
@@ -62,7 +62,7 @@ npx /Users/marosdeeuma/agent-project-patterns init
 เพื่อให้คุณใช้งาน `@dan/agent-patterns` ได้อย่างเต็มประสิทธิภาพ นี่คือรายละเอียดเชิงลึกของทุกคำสั่งที่มีให้ใช้งานครับ:
 
 ### 1. `init` — Project Initialization 🏗️
-ใช้สำหรับติดตั้ง Patterns ทั้งหมดเข้าสู่โปรเจคใหม่ของคุณ (Scaffold everything)
+ใช้สำหรับติดตั้ง Skills ทั้งหมดเข้าสู่โปรเจคใหม่ของคุณ (Scaffold everything)
 
 ```bash
 # แบบปกติ (Interactive Mode)
@@ -73,112 +73,107 @@ agent-patterns init -y
 ```
 
 **รายละเอียดเพิ่มเติม:**
-- ระบบจะถามว่าต้องการติดตั้งไว้ที่ไหน โดยมีตัวเลือกยอดนิยมเช่น `.cursor/rules/`, `.agent/`, หรือ `.claude/patterns`
-- **Flag `-y, --yes`**: จะข้ามทุกคำถามและติดตั้งลงในโฟลเดอร์เริ่มต้น (`.agent/`) ทันที
+- ระบบจะใช้โฟลเดอร์มาตรฐาน **`.agents/skills/`** เป็นค่าเริ่มต้น (Recommended)
+- **Flag `-y, --yes`**: จะข้ามทุกคำถามและติดตั้งลงในโฟลเดอร์เริ่มต้นทันที
 - **Flag `-f, --force`**: ใช้สำหรับเขียนทับ (Overwrite) ไฟล์เดิมในโฟลเดอร์ปลายทาง
-- **Flag `-d, --dest <dir>`**: กำหนดโฟลเดอร์ปลายทางเองโดยตรง (เช่น `agent-patterns init -d my-docs`)
+- **Flag `-d, --dest <dir>`**: กำหนดโฟลเดอร์ปลายทางเองโดยตรง (เช่น `agent-patterns init -d .antigravity`)
 
 ---
 
-### 2. `add [id]` — Add Specific Pattern ➕
-ใช้สำหรับเลือกติดตั้งเฉพาะ Pattern ที่ต้องการ (Selective installation)
+### 2. `add [id]` — Add Specific Skill ➕
+ใช้สำหรับเลือกติดตั้งเฉพาะ Skill ที่ต้องการ (Selective installation)
 
 ```bash
 # เลือกจากรายการ (Interactive List)
 agent-patterns add
 
-# ระบุ ID ของ Pattern โดยตรง
+# ระบุ ID ของ Skill โดยตรง
 agent-patterns add page
 agent-patterns add repo
 ```
 
 **รายละเอียดเพิ่มเติม:**
-- หากไม่ระบุ `id` ตัวโปรแกรมจะแสดงรายการ Pattern ทั้งหมดที่มีให้คุณเลือก
+- หากไม่ระบุ `id` ตัวโปรแกรมจะแสดงรายการ Skill ทั้งหมดที่มีให้คุณเลือก
 - เหมาะสำหรับกรณีที่คุณมีโปรเจคอยู่แล้ว และต้องการเพิ่มเฉพาะความสามารถใหม่ๆ เข้าไป
 
 ---
 
 ### 3. `check` — Version Validation 🔍
-ตรวจสอบความสดใหม่ของไฟล์ Patterns ในโปรเจคของคุณ เทียบกับต้นฉบับ (Local Master)
+ตรวจสอบความสดใหม่ของไฟล์ Skills ในโปรเจคของคุณ เทียบกับต้นฉบับ (Local Master)
 
 ```bash
 agent-patterns check
 ```
 
 **รายละเอียดเพิ่มเติม:**
-- ระบบจะสแกนหาโฟลเดอร์ Patterns ในโปรเจคของคุณอัตโนมัติ
+- ระบบจะสแกนหาโฟลเดอร์มาตรฐานในโปรเจคของคุณอัตโนมัติ
 - **สัญลักษณ์ที่ปรากฏ:**
   - `✓` : ไฟล์ตรงกับต้นฉบับ (Up to date)
   - `!` : ไฟล์ล้าสมัย มีการแก้ไขที่ต้นฉบับแล้ว (Outdated)
-  - `○` : ยังไม่ได้ติดตั้ง Pattern นี้ (Not installed)
+  - `○` : ยังไม่ได้ติดตั้ง Skill นี้ (Not installed)
 
 ---
 
-### 4. `update` — Synchronize Patterns 🔄
-ซิงค์ข้อมูลใหม่ล่าสุดจากโฟลเดอร์ `patterns/` ในเครื่องคุณ เข้าสู่โปรเจคที่กำลังทำงานอยู่
+### 4. `update` — Synchronize Skills 🔄
+ซิงค์ข้อมูลใหม่ล่าสุดจากโฟลเดอร์ `skills/` ในเครื่องคุณ เข้าสู่โปรเจคที่กำลังทำงานอยู่
 
 ```bash
 agent-patterns update
 ```
 
 **รายละเอียดเพิ่มเติม:**
-- คำสั่งนี้จะทำการ **Overwrite** ไฟล์ที่ล้าสมัย (ที่ขึ้นเครื่องหมาย `!` ในตอนเช็ค) ให้กลายเป็นเวอร์ชันล่าสุดทันที
-- **Tip:** เมื่อคุณแก้ไข "ทักษะ" ของ AI ที่โปรเจคต้นฉบับเสร็จแล้ว ให้มารันคำสั่งนี้ที่โปรเจคทำงานเพื่อให้ AI เก่งขึ้นตามต้นฉบับครับ
+- คำสั่งนี้จะทำการ **Overwrite** ไฟล์ที่ล้าสมัยให้กลายเป็นเวอร์ชันล่าสุดทันที
+- เมื่อคุณแก้ไข "ทักษะ" ที่โปรเจคต้นฉบับเสร็จแล้ว รันคำสั่งนี้เพื่อให้ AI ทุกตัวเก่งขึ้นพร้อมกันครับ
 
 ---
 
 ### 5. `list` — Registry Overview 📋
-ดูรายการ Patterns ทั้งหมดที่ระบบรองรับในปัจจุบัน
+ดูรายการ Skills ทั้งหมดที่ระบบรองรับในปัจจุบัน
 
 ```bash
 agent-patterns list
 ```
 
-**รายละเอียดเพิ่มเติม:**
-- แสดงทั้ง ID, คำอธิบายสั้นๆ และ Tags ที่เกี่ยวข้อง
-- ช่วยให้คุณรู้ว่ามี "ทักษะ" อะไรบ้างที่คุณสามารถ `add` เข้าไปในโปรเจคได้
-
 ---
 
-## 📂 โครงสร้างที่สร้างให้ AI (Structure Injection)
+## 📂 โครงสร้างมาตรฐาน (Industry Standard)
 
-เมื่อรันคำสั่ง `init` ตัวโปรแกรมจะสร้างโฟลเดอร์สำหรับ IDE (เช่น `.cursor/rules/`) ซึ่งจะมีโครงสร้างดังนี้:
+เมื่อคุณรันคำสั่ง `init` ระบบจะสร้างโครงสร้างตามมาตรฐานสากล ซึ่ง AI Agent ส่วนใหญ่ (รวมถึงเครื่องมือจัดการอย่าง `chrlsio/agent-skills`) จะหาเจอทันที:
 
 ```text
-📁 .cursor/rules/[pattern-id]/
-   ├── PATTERN.md         # AI instructions (หลักการและกฎที่ AI ต้องทำตาม)
-   └── references/        # Deep-dive templates (ตัวอย่างโค้ดฉบับเต็ม)
+📁 .agents/skills/
+   📁 create-page/
+      ├── SKILL.md           # AI instructions (YAML + Instructions)
+      └── references/        # Deep-dive templates & examples
+   📁 create-repo/
+      ├── SKILL.md
+      └── references/
 ```
 
-**📌 หัวใจสำคัญ:** AI Agent จะอ่านไฟล์ `PATTERN.md` เพื่อเรียนรู้มาตรฐาน **Clean Architecture** ของคุณ ทำให้โค้ดที่มันเขียนออกมามีคุณภาพและสม่ำเสมอครับ!
+**📌 หัวใจสำคัญ:** AI Agent จะอ่านไฟล์ `SKILL.md` เพื่อเรียนรู้มาตรฐาน **Clean Architecture** ของคุณ
 
 ---
 
-## 📝 รายการ Patterns ที่มีจำหน่าย (Registry)
+## 📝 รายการ Skills ที่มีจำหน่าย (Registry)
 
-| ID | ชื่อไฟล์ | คำอธิบาย |
-|----|----------|----------|
-| `page` | `CREATE_PAGE_PATTERN.md` | โครงสร้าง Page (Repository → Presenter → View) |
-| `repo` | `CREATE_REPO_PATTERN.md` | โครงสร้าง Data Layer (Interface → Implementation) |
+| ID | คำอธิบาย |
+|----|----------|
+| `create-page` | โครงสร้าง Page (Repository → Presenter → View) |
+| `create-repo` | โครงสร้าง Data Layer (Interface → Implementation) |
 
 ---
 
-## 💡 สำหรับนักพัฒนา (How to add new pattern)
+## 💡 สำหรับนักพัฒนา (How to add new skill)
 
-1. เพิ่มไฟล์ Markdown ของคุณในโฟลเดอร์ `patterns/`
-2. ลงทะเบียนไฟล์นั้นใน `src/registry.js`
-3. ทดสอบเรียกใช้ด้วย `agent-patterns list`
+1. เพิ่มไฟล์ Markdown ของคุณในโฟลเดอร์ `skills/`
+2. ตั้งชื่อไฟล์หลักว่า **`SKILL.md`** (ต้องมี YAML frontmatter)
+3. ลงทะเบียนใน [src/registry.js](file:///Users/marosdeeuma/agent-project-patterns/src/registry.js)
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have a pattern that could benefit others, please feel free to:
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingPattern`)
-3. Commit your Changes (`git commit -m 'Add some AmazingPattern'`)
-4. Push to the Branch (`git push origin feature/AmazingPattern`)
-5. Open a Pull Request
+Contributions are welcome! If you have a skill that could benefit others, please feel free to submit a Pull Request.
 
 ## 📄 License
 

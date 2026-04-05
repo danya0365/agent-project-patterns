@@ -1,10 +1,10 @@
 /**
- * Pattern Registry
- * ทุก pattern คือ folder ที่มี PATTERN.md + references/
- * เพิ่ม pattern ใหม่ได้ที่นี่ — CLI จะ auto-discover ให้เลย
+ * Skills Registry
+ * ทุก skill คือ folder ที่มี SKILL.md + references/
+ * เพิ่ม skill ใหม่ได้ที่นี่ — CLI จะ auto-discover ให้เลย
  */
 
-export const PATTERNS = [
+export const SKILLS = [
   {
     id: 'create-page',
     folder: 'create-page',
@@ -17,14 +17,16 @@ export const PATTERNS = [
     description: 'สร้าง Repository ใหม่ (Interface → Mock → Supabase → API)',
     tags: ['repository', 'supabase', 'mock', 'api'],
   },
-  // ➕ เพิ่ม pattern ใหม่ตรงนี้
+  // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
-export const DEFAULT_DEST = '.agent';
+export const DEFAULT_DEST = '.agents/skills';
 
 export const ALT_DESTINATIONS = [
-  { label: '.agent/          (Agent Patterns — default)', value: '.agent' },
+  { label: '.agents/skills/  (Industry Standard — recommended)', value: '.agents/skills' },
+  { label: '.antigravity/    (Antigravity Agent)', value: '.antigravity' },
+  { label: '.windsurf/rules/ (Windsurf rules)', value: '.windsurf/rules' },
   { label: '.cursor/rules/   (Cursor AI context)', value: '.cursor/rules' },
   { label: '.claude/patterns (Claude Code)', value: '.claude/patterns' },
-  { label: 'docs/patterns/   (Documentation)', value: 'docs/patterns' },
+  { label: 'docs/skills/     (Documentation)', value: 'docs/skills' },
 ];
