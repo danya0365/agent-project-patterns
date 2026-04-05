@@ -1,101 +1,156 @@
-# 🤖 @dan/agent-patterns
+<div align="center">
+  <img src="https://img.icons8.com/color/96/robot-2.png" alt="Logo" width="80" />
+  <h1>@dan/agent-patterns</h1>
+  <p><b>Standardize your AI-driven development with Clean Architecture Patterns</b></p>
 
-เครื่องมือ CLI สำหรับจัดการและติดตั้ง **AI Agent Patterns** เข้าสู่โปรเจค Next.js ของคุณ เพื่อให้ AI (เช่น Cursor, Claude, หรือ ChatGPT) เข้าใจมาตรฐานโค้ด (Clean Architecture) และช่วยเขียนโค้ดได้แม่นยำยิ่งขึ้น ✨
+  <p>
+    <a href="https://www.npmjs.com/package/@dan/agent-patterns"><img src="https://img.shields.io/npm/v/@dan/agent-patterns.svg?style=flat-square" alt="NPM Version" /></a>
+    <a href="https://github.com/danya0365/agent-project-patterns/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/@dan/agent-patterns.svg?style=flat-square" alt="License" /></a>
+    <img src="https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg?style=flat-square" alt="Node Version" />
+    <img src="https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat-square" alt="PRs Welcome" />
+  </p>
+</div>
 
 ---
 
-## 🚀 การติดตั้งและใช้งาน (Local Development)
+## 🌟 Overview (ความเป็นมา)
 
-เนื่องจากโปรเจคนี้อยู่ในเครื่องของคุณ คุณสามารถเรียกใช้งานในโปรเจคอื่นๆ ได้ 2 วิธี:
+**The Problem:** AI Coding Agents (like Cursor, Claude, or ChatGPT) often generate messy, inconsistent code if not given clear architectural rules.
+**The Solution:** `@dan/agent-patterns` provides a CLI to inject standardized **Clean Architecture** patterns directly into your project's AI context.
 
-### วิธีที่ 1: ใช้ `npm link` (แนะนำ)
-วิธีนี้จะทำให้คุณพิมพ์คำสั่ง `agent-patterns` ได้จากทุกที่ในเครื่อง:
-1. เข้าไปที่โฟลเดอร์โปรเจคนี้:
+> [!TIP]
+> This tool ensures your AI assistant always follows your established Repository-Presenter-View patterns.
+
+---
+
+## ✨ Features (จุดเด่น)
+
+- 🏗️ **Clean Architecture Scout:** Scaffold standardized structures in seconds.
+- 🤖 **AI-Native:** Designed specifically for IDEs like Cursor (`.cursor/rules`) and Claude (`.claude/patterns`).
+- 🔄 **One-Click Sync:** Keep patterns across all your projects up-to-date with a single command.
+- 🛠️ **Local-First:** Optimized for developers who want to manage their own local pattern library.
+- 🇹🇭 **Bi-lingual Support:** Excellent documentation in both English and Thai.
+
+---
+
+## 🚀 Getting Started (การเริ่มต้นใช้งาน)
+
+### Method 1: Local Development (Recommended)
+Since this project is on your local machine, use `npm link` to make it available globally:
+
+1. **In this directory:**
    ```bash
    cd /Users/marosdeeuma/agent-project-patterns
    npm link
    ```
-2. ไปยังโปรเจคที่คุณต้องการใช้งาน (เช่น `ai-content-creator-nextjs`):
+2. **In your target project (e.g. `ai-content-creator-nextjs`):**
    ```bash
-   cd /Users/marosdeeuma/ai-content-creator-nextjs
+   cd /path/to/your/project
    agent-patterns init
    ```
 
-### วิธีที่ 2: ใช้ `npx` (ไม่ต้องติดตั้งเข้าระบบ)
-เหมาะสำหรับการเรียกใช้งานแบบครั้งเดียว:
+### Method 2: Immediate Execution (npx)
+Run without linking:
 ```bash
 npx /Users/marosdeeuma/agent-project-patterns init
 ```
 
 ---
 
-## 🛠️ คำสั่งการใช้งาน (Commands)
+## 🛠️ CLI Reference (เจาะลึกการใช้งาน)
 
-### 1. `init` — ติดตั้ง Patterns ทั้งหมด
-คัดลอกไฟล์มาตรฐาน (Pages, Repositories, etc.) เข้าสู่โปรเจคของคุณ
+เพื่อให้คุณใช้งาน `@dan/agent-patterns` ได้อย่างเต็มประสิทธิภาพ นี่คือรายละเอียดเชิงลึกของทุกคำสั่งที่มีให้ใช้งานครับ:
+
+### 1. `init` — Project Initialization 🏗️
+ใช้สำหรับติดตั้ง Patterns ทั้งหมดเข้าสู่โปรเจคใหม่ของคุณ (Scaffold everything)
+
 ```bash
-# แบบปกติ (จะมีถามว่าจะเก็บไว้โฟลเดอร์ไหน)
+# แบบปกติ (Interactive Mode)
 agent-patterns init
 
-# แบบข้ามคำถาม (ติดตั้งลง .cursor/rules/ ทันที)
+# แบบรวดเร็ว (Skip Prompts)
 agent-patterns init -y
-
-# กำหนดโฟลเดอร์ปลายทางเอง
-agent-patterns init -d .agent
 ```
 
-### 2. `add [id]` — เพิ่มบาง Pattern
-เลือกติดตั้งเฉพาะอย่างที่คุณต้องการ
+**รายละเอียดเพิ่มเติม:**
+- ระบบจะถามว่าต้องการติดตั้งไว้ที่ไหน โดยมีตัวเลือกยอดนิยมเช่น `.cursor/rules/`, `.agent/`, หรือ `.claude/patterns`
+- **Flag `-y, --yes`**: จะข้ามทุกคำถามและติดตั้งลงในโฟลเดอร์เริ่มต้น (`.agent/`) ทันที
+- **Flag `-f, --force`**: ใช้สำหรับเขียนทับ (Overwrite) ไฟล์เดิมในโฟลเดอร์ปลายทาง
+- **Flag `-d, --dest <dir>`**: กำหนดโฟลเดอร์ปลายทางเองโดยตรง (เช่น `agent-patterns init -d my-docs`)
+
+---
+
+### 2. `add [id]` — Add Specific Pattern ➕
+ใช้สำหรับเลือกติดตั้งเฉพาะ Pattern ที่ต้องการ (Selective installation)
+
 ```bash
-# เลือกจากรายการ (Interactive)
+# เลือกจากรายการ (Interactive List)
 agent-patterns add
 
-# ระบุ ID โดยตรง
+# ระบุ ID ของ Pattern โดยตรง
 agent-patterns add page
 agent-patterns add repo
 ```
 
-### 3. `check` — ตรวจสอบเวอร์ชัน
-เช็คว่าไฟล์ในโปรเจคของคุณล้าสมัยกว่าตัวต้นฉบับในเครื่องหรือไม่
+**รายละเอียดเพิ่มเติม:**
+- หากไม่ระบุ `id` ตัวโปรแกรมจะแสดงรายการ Pattern ทั้งหมดที่มีให้คุณเลือก
+- เหมาะสำหรับกรณีที่คุณมีโปรเจคอยู่แล้ว และต้องการเพิ่มเฉพาะความสามารถใหม่ๆ เข้าไป
+
+---
+
+### 3. `check` — Version Validation 🔍
+ตรวจสอบความสดใหม่ของไฟล์ Patterns ในโปรเจคของคุณ เทียบกับต้นฉบับ (Local Master)
+
 ```bash
 agent-patterns check
 ```
 
-### 4. `update` — อัปเดตไฟล์ให้เป็นปัจจุบัน
+**รายละเอียดเพิ่มเติม:**
+- ระบบจะสแกนหาโฟลเดอร์ Patterns ในโปรเจคของคุณอัตโนมัติ
+- **สัญลักษณ์ที่ปรากฏ:**
+  - `✓` : ไฟล์ตรงกับต้นฉบับ (Up to date)
+  - `!` : ไฟล์ล้าสมัย มีการแก้ไขที่ต้นฉบับแล้ว (Outdated)
+  - `○` : ยังไม่ได้ติดตั้ง Pattern นี้ (Not installed)
+
+---
+
+### 4. `update` — Synchronize Patterns 🔄
+ซิงค์ข้อมูลใหม่ล่าสุดจากโฟลเดอร์ `patterns/` ในเครื่องคุณ เข้าสู่โปรเจคที่กำลังทำงานอยู่
+
 ```bash
 agent-patterns update
 ```
 
----
-
-## 📂 โครงสร้างที่สร้างให้ AI
-
-เมื่อรันคำสั่ง `init` ตัวโปรแกรมจะสร้างโฟลเดอร์ปลายทาง (เช่น `.cursor/rules/`) ซึ่งด้านในจะมี:
-
-- `PATTERN.md`: ไฟล์หลักที่ AI Agent จะอ่านเพื่อเรียนรู้วิธีการเขียนโค้ด (Rules & Patterns)
-- `references/`: ไฟล์ตัวอย่างหรือคู่มือฉบับเต็มที่ AI สามารถเข้าไปอ่านเพิ่มเติมได้
-
-**เหตุผลที่ต้องมีสิ่งนี้:** 
-ช่วยให้ AI ไม่เขียนโค้ดมั่วซั่ว และทำตามมาตรฐาน **Clean Architecture** ที่คุณกำหนดไว้เสมอ!
+**รายละเอียดเพิ่มเติม:**
+- คำสั่งนี้จะทำการ **Overwrite** ไฟล์ที่ล้าสมัย (ที่ขึ้นเครื่องหมาย `!` ในตอนเช็ค) ให้กลายเป็นเวอร์ชันล่าสุดทันที
+- **Tip:** เมื่อคุณแก้ไข "ทักษะ" ของ AI ที่โปรเจคต้นฉบับเสร็จแล้ว ให้มารันคำสั่งนี้ที่โปรเจคทำงานเพื่อให้ AI เก่งขึ้นตามต้นฉบับครับ
 
 ---
 
-## 🔄 การอัปเดตและซิงค์ Patterns (Sync & Update)
+### 5. `list` — Registry Overview 📋
+ดูรายการ Patterns ทั้งหมดที่ระบบรองรับในปัจจุบัน
 
-หากมีการแก้ไขไฟล์ในโฟลเดอร์ `patterns/` ของโปรเจคต้นฉบับ คุณสามารถอัปเดตโปรเจคอื่นๆ ได้ง่ายๆ ดังนี้:
-
-### 1. ตรวจสอบเวอร์ชัน
-เข้าไปที่โปรเจคที่ติดตั้ง Patterns ไว้แล้วรันคำสั่ง:
 ```bash
-agent-patterns check
+agent-patterns list
 ```
-*ระบบจะเปรียบเทียบเนื้อหาไฟล์ในโปรเจคกับต้นฉบับ หากไม่ตรงกันจะขึ้นเครื่องหมาย `!` (Outdated)*
 
-### 2. ทำการอัปเดต
-รันคำสั่งเพื่อคัดลอกไฟล์ใหม่จากต้นฉบับมาเขียนทับไฟล์เดิม:
-```bash
-agent-patterns update
+**รายละเอียดเพิ่มเติม:**
+- แสดงทั้ง ID, คำอธิบายสั้นๆ และ Tags ที่เกี่ยวข้อง
+- ช่วยให้คุณรู้ว่ามี "ทักษะ" อะไรบ้างที่คุณสามารถ `add` เข้าไปในโปรเจคได้
+
+---
+
+## 📂 โครงสร้างที่สร้างให้ AI (Structure Injection)
+
+เมื่อรันคำสั่ง `init` ตัวโปรแกรมจะสร้างโฟลเดอร์สำหรับ IDE (เช่น `.cursor/rules/`) ซึ่งจะมีโครงสร้างดังนี้:
+
+```text
+📁 .cursor/rules/[pattern-id]/
+   ├── PATTERN.md         # AI instructions (หลักการและกฎที่ AI ต้องทำตาม)
+   └── references/        # Deep-dive templates (ตัวอย่างโค้ดฉบับเต็ม)
 ```
+
+**📌 หัวใจสำคัญ:** AI Agent จะอ่านไฟล์ `PATTERN.md` เพื่อเรียนรู้มาตรฐาน **Clean Architecture** ของคุณ ทำให้โค้ดที่มันเขียนออกมามีคุณภาพและสม่ำเสมอครับ!
 
 ---
 
@@ -113,3 +168,22 @@ agent-patterns update
 1. เพิ่มไฟล์ Markdown ของคุณในโฟลเดอร์ `patterns/`
 2. ลงทะเบียนไฟล์นั้นใน `src/registry.js`
 3. ทดสอบเรียกใช้ด้วย `agent-patterns list`
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! If you have a pattern that could benefit others, please feel free to:
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingPattern`)
+3. Commit your Changes (`git commit -m 'Add some AmazingPattern'`)
+4. Push to the Branch (`git push origin feature/AmazingPattern`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](file:///Users/marosdeeuma/agent-project-patterns/LICENSE) file for details.
+
+---
+
+<p align="center">Made with ❤️ for the AI Generation</p>
