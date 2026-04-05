@@ -1,6 +1,6 @@
-# 🤖 @dan/agent-skills
+# 🤖 @dan/agent-patterns
 
-เครื่องมือ CLI สำหรับจัดการและติดตั้ง **AI Agent Patterns & Skills** เข้าสู่โปรเจค Next.js ของคุณ เพื่อให้ AI (เช่น Cursor, Claude, หรือ ChatGPT) เข้าใจมาตรฐานโค้ด (Clean Architecture) และช่วยเขียนโค้ดได้แม่นยำยิ่งขึ้น ✨
+เครื่องมือ CLI สำหรับจัดการและติดตั้ง **AI Agent Patterns** เข้าสู่โปรเจค Next.js ของคุณ เพื่อให้ AI (เช่น Cursor, Claude, หรือ ChatGPT) เข้าใจมาตรฐานโค้ด (Clean Architecture) และช่วยเขียนโค้ดได้แม่นยำยิ่งขึ้น ✨
 
 ---
 
@@ -9,7 +9,7 @@
 เนื่องจากโปรเจคนี้อยู่ในเครื่องของคุณ คุณสามารถเรียกใช้งานในโปรเจคอื่นๆ ได้ 2 วิธี:
 
 ### วิธีที่ 1: ใช้ `npm link` (แนะนำ)
-วิธีนี้จะทำให้คุณพิมพ์คำสั่ง `agent-skills` ได้จากทุกที่ในเครื่อง:
+วิธีนี้จะทำให้คุณพิมพ์คำสั่ง `agent-patterns` ได้จากทุกที่ในเครื่อง:
 1. เข้าไปที่โฟลเดอร์โปรเจคนี้:
    ```bash
    cd /Users/marosdeeuma/agent-project-patterns
@@ -18,7 +18,7 @@
 2. ไปยังโปรเจคที่คุณต้องการใช้งาน (เช่น `ai-content-creator-nextjs`):
    ```bash
    cd /Users/marosdeeuma/ai-content-creator-nextjs
-   agent-skills init
+   agent-patterns init
    ```
 
 ### วิธีที่ 2: ใช้ `npx` (ไม่ต้องติดตั้งเข้าระบบ)
@@ -35,35 +35,35 @@ npx /Users/marosdeeuma/agent-project-patterns init
 คัดลอกไฟล์มาตรฐาน (Pages, Repositories, etc.) เข้าสู่โปรเจคของคุณ
 ```bash
 # แบบปกติ (จะมีถามว่าจะเก็บไว้โฟลเดอร์ไหน)
-agent-skills init
+agent-patterns init
 
 # แบบข้ามคำถาม (ติดตั้งลง .cursor/rules/ ทันที)
-agent-skills init -y
+agent-patterns init -y
 
 # กำหนดโฟลเดอร์ปลายทางเอง
-agent-skills init -d .agent
+agent-patterns init -d .agent
 ```
 
 ### 2. `add [id]` — เพิ่มบาง Pattern
 เลือกติดตั้งเฉพาะอย่างที่คุณต้องการ
 ```bash
 # เลือกจากรายการ (Interactive)
-agent-skills add
+agent-patterns add
 
 # ระบุ ID โดยตรง
-agent-skills add page
-agent-skills add repo
+agent-patterns add page
+agent-patterns add repo
 ```
 
 ### 3. `check` — ตรวจสอบเวอร์ชัน
 เช็คว่าไฟล์ในโปรเจคของคุณล้าสมัยกว่าตัวต้นฉบับในเครื่องหรือไม่
 ```bash
-agent-skills check
+agent-patterns check
 ```
 
 ### 4. `update` — อัปเดตไฟล์ให้เป็นปัจจุบัน
 ```bash
-agent-skills update
+agent-patterns update
 ```
 
 ---
@@ -72,7 +72,7 @@ agent-skills update
 
 เมื่อรันคำสั่ง `init` ตัวโปรแกรมจะสร้างโฟลเดอร์ปลายทาง (เช่น `.cursor/rules/`) ซึ่งด้านในจะมี:
 
-- `SKILL.md`: ไฟล์หลักที่ AI Agent จะอ่านเพื่อเรียนรู้วิธีการเขียนโค้ด (Rules & Patterns)
+- `PATTERN.md`: ไฟล์หลักที่ AI Agent จะอ่านเพื่อเรียนรู้วิธีการเขียนโค้ด (Rules & Patterns)
 - `references/`: ไฟล์ตัวอย่างหรือคู่มือฉบับเต็มที่ AI สามารถเข้าไปอ่านเพิ่มเติมได้
 
 **เหตุผลที่ต้องมีสิ่งนี้:** 
@@ -87,14 +87,14 @@ agent-skills update
 ### 1. ตรวจสอบเวอร์ชัน
 เข้าไปที่โปรเจคที่ติดตั้ง Patterns ไว้แล้วรันคำสั่ง:
 ```bash
-agent-skills check
+agent-patterns check
 ```
 *ระบบจะเปรียบเทียบเนื้อหาไฟล์ในโปรเจคกับต้นฉบับ หากไม่ตรงกันจะขึ้นเครื่องหมาย `!` (Outdated)*
 
 ### 2. ทำการอัปเดต
 รันคำสั่งเพื่อคัดลอกไฟล์ใหม่จากต้นฉบับมาเขียนทับไฟล์เดิม:
 ```bash
-agent-skills update
+agent-patterns update
 ```
 
 ---
@@ -112,4 +112,4 @@ agent-skills update
 
 1. เพิ่มไฟล์ Markdown ของคุณในโฟลเดอร์ `patterns/`
 2. ลงทะเบียนไฟล์นั้นใน `src/registry.js`
-3. ทดสอบเรียกใช้ด้วย `agent-skills list`
+3. ทดสอบเรียกใช้ด้วย `agent-patterns list`

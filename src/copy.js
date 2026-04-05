@@ -3,15 +3,15 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SKILLS_DIR = path.join(__dirname, '..', 'skills');
+const PATTERNS_DIR = path.join(__dirname, '..', 'patterns');
 
 /**
- * Copy a single skill folder (SKILL.md + references/) to destination
- * Result: destDir/skill-folder/ ← folder ทั้งหมด
+ * Copy a single pattern folder (PATTERN.md + references/) to destination
+ * Result: destDir/pattern-folder/ ← folder ทั้งหมด
  */
-export function copySkill(skill, destDir, { overwrite = false } = {}) {
-  const srcFolder = path.join(SKILLS_DIR, skill.folder);
-  const destFolder = path.join(process.cwd(), destDir, skill.folder);
+export function copyPattern(pattern, destDir, { overwrite = false } = {}) {
+  const srcFolder = path.join(PATTERNS_DIR, pattern.folder);
+  const destFolder = path.join(process.cwd(), destDir, pattern.folder);
 
   if (!fs.existsSync(srcFolder)) {
     return { success: false, skipped: false, destFolder, reason: `Source folder not found: ${srcFolder}` };
@@ -43,33 +43,33 @@ function copyDirRecursive(src, dest) {
 }
 
 /**
- * Check if a skill folder is up-to-date by comparing SKILL.md content
+ * Check if a pattern folder is up-to-date by comparing PATTERN.md content
  */
-export function checkSkillVersion(skill, destDir) {
-  const srcSkillMd = path.join(SKILLS_DIR, skill.folder, 'SKILL.md');
-  const destSkillMd = path.join(process.cwd(), destDir, skill.folder, 'SKILL.md');
+export function checkPatternVersion(pattern, destDir) {
+  const srcPatternMd = path.join(PATTERNS_DIR, pattern.folder, 'PATTERN.md');
+  const destPatternMd = path.join(process.cwd(), destDir, pattern.folder, 'PATTERN.md');
 
-  if (!fs.existsSync(destSkillMd)) {
+  if (!fs.existsSync(destPatternMd)) {
     return { exists: false, upToDate: false };
   }
 
-  const srcContent = fs.readFileSync(srcSkillMd, 'utf8');
-  const destContent = fs.readFileSync(destSkillMd, 'utf8');
+  const srcContent = fs.readFileSync(srcPatternMd, 'utf8');
+  const destContent = fs.readFileSync(destPatternMd, 'utf8');
   return { exists: true, upToDate: srcContent === destContent };
 }
 
 /**
- * Auto-detect directories in the current project that have skill folders
+ * Auto-detect directories in the current project that have pattern folders
  */
-export function detectInstalledDirs(skills) {
-  const candidates = ['.agent', '.cursor/rules', '.claude/skills', 'docs/skills'];
+export function detectInstalledDirs(patterns) {
+  const candidates = ['.agent', '.cursor/rules', '.claude/patterns', 'docs/patterns'];
   const found = [];
 
   for (const dir of candidates) {
     const absDir = path.join(process.cwd(), dir);
     if (!fs.existsSync(absDir)) continue;
-    const hasAny = skills.some((s) =>
-      fs.existsSync(path.join(absDir, s.folder, 'SKILL.md'))
+    const hasAny = patterns.some((p) =>
+      fs.existsSync(path.join(absDir, p.folder, 'PATTERN.md'))
     );
     if (hasAny) found.push(dir);
   }

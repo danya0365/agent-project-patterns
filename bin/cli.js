@@ -4,8 +4,8 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 
-import { SKILLS, DEFAULT_DEST, ALT_DESTINATIONS } from '../src/registry.js';
-import { copySkill, checkSkillVersion, detectInstalledDirs } from '../src/copy.js';
+import { PATTERNS, DEFAULT_DEST, ALT_DESTINATIONS } from '../src/registry.js';
+import { copyPattern, checkPatternVersion, detectInstalledDirs } from '../src/copy.js';
 
 const program = new Command();
 
@@ -20,7 +20,7 @@ const log = {
 
 function printBanner() {
   console.log(chalk.bold.cyan('\n╔══════════════════════════════════════════╗'));
-  console.log(chalk.bold.cyan('║') + chalk.bold.white('   🤖  @dan/agent-skills  CLI             ') + chalk.bold.cyan('║'));
+  console.log(chalk.bold.cyan('║') + chalk.bold.white('   🤖  @dan/agent-patterns  CLI           ') + chalk.bold.cyan('║'));
   console.log(chalk.bold.cyan('╚══════════════════════════════════════════╝\n'));
 }
 
@@ -28,13 +28,13 @@ function printBanner() {
 
 program
   .command('init')
-  .description('Copy all skills into the current project')
+  .description('Copy all patterns into the current project')
   .option('-d, --dest <dir>', 'Destination directory', DEFAULT_DEST)
-  .option('-f, --force', 'Overwrite existing skill folders', false)
+  .option('-f, --force', 'Overwrite existing pattern folders', false)
   .option('-y, --yes', 'Skip prompts, use defaults', false)
   .action(async (options) => {
     printBanner();
-    log.title('Initializing agent skills...');
+    log.title('Initializing agent patterns...');
     log.dim(`Project: ${process.cwd()}\n`);
 
     let dest = options.dest;
@@ -43,7 +43,7 @@ program
       const answer = await inquirer.prompt([{
         type: 'list',
         name: 'dest',
-        message: 'Where should skills be installed?',
+        message: 'Where should patterns be installed?',
         choices: ALT_DESTINATIONS,
         default: DEFAULT_DEST,
       }]);
@@ -52,18 +52,18 @@ program
 
     let copied = 0, skipped = 0, failed = 0;
 
-    for (const skill of SKILLS) {
-      const result = copySkill(skill, dest, { overwrite: options.force });
-      const label = `${dest}/${skill.folder}/`;
+    for (const pattern of PATTERNS) {
+      const result = copyPattern(pattern, dest, { overwrite: options.force });
+      const label = `${dest}/${pattern.folder}/`;
 
       if (result.success) {
-        log.success(`${skill.id.padEnd(16)} →  ${label}`);
+        log.success(`${pattern.id.padEnd(16)} →  ${label}`);
         copied++;
       } else if (result.skipped) {
-        log.warn(`${skill.id.padEnd(16)} already exists (--force to overwrite)`);
+        log.warn(`${pattern.id.padEnd(16)} already exists (--force to overwrite)`);
         skipped++;
       } else {
-        log.error(`${skill.id.padEnd(16)} failed: ${result.reason}`);
+        log.error(`${pattern.id.padEnd(16)} failed: ${result.reason}`);
         failed++;
       }
     }
@@ -74,9 +74,9 @@ program
     if (copied > 0) {
       console.log('');
       console.log(chalk.bold('📌 Structure ที่สร้าง:'));
-      for (const skill of SKILLS) {
-        log.dim(`  ${dest}/${skill.folder}/`);
-        log.dim(`    ├── SKILL.md            ← AI อ่านตอน activate`);
+      for (const pattern of PATTERNS) {
+        log.dim(`  ${dest}/${pattern.folder}/`);
+        log.dim(`    ├── PATTERN.md          ← AI อ่านตอน activate`);
         log.dim(`    └── references/         ← detail เต็มๆ`);
       }
     }
@@ -86,41 +86,41 @@ program
 // ─── add ─────────────────────────────────────────────────────────────────────
 
 program
-  .command('add [skillId]')
-  .description('Copy a specific skill into the current project')
+  .command('add [patternId]')
+  .description('Copy a specific pattern into the current project')
   .option('-d, --dest <dir>', 'Destination directory', DEFAULT_DEST)
-  .option('-f, --force', 'Overwrite existing skill folder', false)
-  .action(async (skillId, options) => {
+  .option('-f, --force', 'Overwrite existing pattern folder', false)
+  .action(async (patternId, options) => {
     printBanner();
 
-    if (!skillId) {
+    if (!patternId) {
       const answer = await inquirer.prompt([{
         type: 'list',
-        name: 'skill',
-        message: 'Which skill do you want to add?',
-        choices: SKILLS.map((s) => ({
-          name: `${s.id.padEnd(20)} ${chalk.dim(s.description)}`,
-          value: s.id,
+        name: 'pattern',
+        message: 'Which pattern do you want to add?',
+        choices: PATTERNS.map((p) => ({
+          name: `${p.id.padEnd(20)} ${chalk.dim(p.description)}`,
+          value: p.id,
         })),
       }]);
-      skillId = answer.skill;
+      patternId = answer.pattern;
     }
 
-    const skill = SKILLS.find((s) => s.id === skillId);
-    if (!skill) {
-      log.error(`Skill "${skillId}" not found.`);
-      log.info(`Available: ${SKILLS.map((s) => s.id).join(', ')}`);
+    const pattern = PATTERNS.find((p) => p.id === patternId);
+    if (!pattern) {
+      log.error(`Pattern "${patternId}" not found.`);
+      log.info(`Available: ${PATTERNS.map((p) => p.id).join(', ')}`);
       process.exit(1);
     }
 
-    const result = copySkill(skill, options.dest, { overwrite: options.force });
+    const result = copyPattern(pattern, options.dest, { overwrite: options.force });
 
     if (result.success) {
-      log.success(`${skill.id}  →  ${options.dest}/${skill.folder}/`);
-      log.dim(`  ├── SKILL.md`);
+      log.success(`${pattern.id}  →  ${options.dest}/${pattern.folder}/`);
+      log.dim(`  ├── PATTERN.md`);
       log.dim(`  └── references/`);
     } else if (result.skipped) {
-      log.warn(`${options.dest}/${skill.folder}/ already exists. Use --force to overwrite.`);
+      log.warn(`${options.dest}/${pattern.folder}/ already exists. Use --force to overwrite.`);
     } else {
       log.error(`Failed: ${result.reason}`);
       process.exit(1);
@@ -132,17 +132,17 @@ program
 
 program
   .command('check')
-  .description('Check if installed skills are up-to-date (compares SKILL.md)')
+  .description('Check if installed patterns are up-to-date (compares PATTERN.md)')
   .option('-d, --dest <dir>', 'Directory to check')
   .action(async (options) => {
     printBanner();
-    log.title('Checking skill versions...\n');
+    log.title('Checking pattern versions...\n');
 
-    const dirs = options.dest ? [options.dest] : detectInstalledDirs(SKILLS);
+    const dirs = options.dest ? [options.dest] : detectInstalledDirs(PATTERNS);
 
     if (dirs.length === 0) {
-      log.warn('No skills found in this project.');
-      log.info('Run "agent-skills init" to install skills.');
+      log.warn('No patterns found in this project.');
+      log.info('Run "agent-patterns init" to install patterns.');
       return;
     }
 
@@ -150,51 +150,51 @@ program
 
     for (const dir of dirs) {
       console.log(chalk.bold(`📁 ${dir}/`));
-      for (const skill of SKILLS) {
-        const { exists, upToDate } = checkSkillVersion(skill, dir);
+      for (const pattern of PATTERNS) {
+        const { exists, upToDate } = checkPatternVersion(pattern, dir);
         if (!exists) {
-          console.log(`   ${chalk.dim('○')} ${skill.id.padEnd(20)} ${chalk.dim('not installed')}`);
+          console.log(`   ${chalk.dim('○')} ${pattern.id.padEnd(20)} ${chalk.dim('not installed')}`);
         } else if (upToDate) {
-          console.log(`   ${chalk.green('✓')} ${skill.id.padEnd(20)} ${chalk.green('up to date')}`);
+          console.log(`   ${chalk.green('✓')} ${pattern.id.padEnd(20)} ${chalk.green('up to date')}`);
         } else {
-          console.log(`   ${chalk.yellow('!')} ${skill.id.padEnd(20)} ${chalk.yellow('outdated')}`);
+          console.log(`   ${chalk.yellow('!')} ${pattern.id.padEnd(20)} ${chalk.yellow('outdated')}`);
           allUpToDate = false;
         }
       }
       console.log('');
     }
 
-    if (!allUpToDate) log.info('Run "agent-skills update" to update outdated skills.');
-    else log.success('All skills are up to date!');
+    if (!allUpToDate) log.info('Run "agent-patterns update" to update outdated patterns.');
+    else log.success('All patterns are up to date!');
   });
 
 // ─── update ──────────────────────────────────────────────────────────────────
 
 program
   .command('update')
-  .description('Update outdated skills in the project')
+  .description('Update outdated patterns in the project')
   .option('-d, --dest <dir>', 'Directory to update')
   .action(async (options) => {
     printBanner();
-    log.title('Updating skills...\n');
+    log.title('Updating patterns...\n');
 
-    const dirs = options.dest ? [options.dest] : detectInstalledDirs(SKILLS);
+    const dirs = options.dest ? [options.dest] : detectInstalledDirs(PATTERNS);
 
     if (dirs.length === 0) {
-      log.warn('No skills found in this project.');
+      log.warn('No patterns found in this project.');
       return;
     }
 
     for (const dir of dirs) {
       console.log(chalk.bold(`📁 ${dir}/`));
-      for (const skill of SKILLS) {
-        const { exists, upToDate } = checkSkillVersion(skill, dir);
-        if (!exists) { log.dim(`   Skipping ${skill.id} (not installed)`); continue; }
-        if (upToDate) { console.log(`   ${chalk.green('✓')} ${skill.id}  already up to date`); continue; }
+      for (const pattern of PATTERNS) {
+        const { exists, upToDate } = checkPatternVersion(pattern, dir);
+        if (!exists) { log.dim(`   Skipping ${pattern.id} (not installed)`); continue; }
+        if (upToDate) { console.log(`   ${chalk.green('✓')} ${pattern.id}  already up to date`); continue; }
 
-        const result = copySkill(skill, dir, { overwrite: true });
-        if (result.success) log.success(`Updated: ${skill.id}`);
-        else log.error(`Failed to update ${skill.id}: ${result.reason}`);
+        const result = copyPattern(pattern, dir, { overwrite: true });
+        if (result.success) log.success(`Updated: ${pattern.id}`);
+        else log.error(`Failed to update ${pattern.id}: ${result.reason}`);
       }
       console.log('');
     }
@@ -218,8 +218,8 @@ program
 // ─── run ─────────────────────────────────────────────────────────────────────
 
 program
-  .name('agent-skills')
-  .description('Scaffold Agent Skills (agentskills.io format) into your Next.js project')
+  .name('agent-patterns')
+  .description('Scaffold Agent Patterns into your Next.js project')
   .version('1.0.0');
 
 program.parse(process.argv);

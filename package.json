@@ -1,10 +1,10 @@
 {
-  "name": "@dan/agent-skills",
+  "name": "@dan/agent-patterns",
   "version": "1.0.0",
-  "description": "CLI tool to scaffold Agent Skills (agentskills.io format) into Next.js projects",
+  "description": "CLI tool to scaffold Agent Patterns into Next.js projects",
   "type": "module",
   "bin": {
-    "agent-skills": "./bin/cli.js"
+    "agent-patterns": "./bin/cli.js"
   },
   "files": [
     "bin/",
