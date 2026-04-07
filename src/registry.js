@@ -17,6 +17,12 @@ export const SKILLS = [
     description: 'สร้าง Repository ใหม่ (Interface → Mock → Supabase → API)',
     tags: ['repository', 'supabase', 'mock', 'api'],
   },
+  {
+    id: 'init-project',
+    folder: 'init-project',
+    description: 'เริ่มต้นโปรเจคใหม่ตาม Clean Architecture (Next.js, Supabase, Tailwind, Zustand)',
+    tags: ['init', 'setup', 'architecture', 'nextjs'],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
