@@ -32,6 +32,19 @@ export const SKILLS = [
       "กฎการเขียน CSS Theme Variables (Next.js + Tailwind v4) - :root → .dark → @theme",
     tags: ["css", "theme", "tailwind", "variables", "dark-mode"],
   },
+  {
+    id: "multi-theme-nextjs",
+    folder: "multi-theme-nextjs",
+    description:
+      "Next.js Multi-Theme System ด้วย CSS Variables + Zustand + Runtime Switching (core, minimal, retro-megazine)",
+    tags: [
+      "nextjs",
+      "multi-theme",
+      "zustand",
+      "css-variables",
+      "runtime-switching",
+    ],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
