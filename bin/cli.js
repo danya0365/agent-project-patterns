@@ -44,9 +44,13 @@ function getStacks() {
   return Array.from(stacks).sort();
 }
 
-// Helper: Filter skills by stack
+// Helper: Filter skills by stack(s)
 function filterSkillsByStack(stack) {
   if (!stack || stack === "all") return SKILLS;
+  if (Array.isArray(stack)) {
+    if (stack.includes("all") || stack.length === 0) return SKILLS;
+    return SKILLS.filter((s) => stack.some((st) => s.tags.includes(st)));
+  }
   return SKILLS.filter((s) => s.tags.includes(stack));
 }
 
@@ -85,34 +89,46 @@ program
   .option("-d, --dest <dir>", "Destination directory", DEFAULT_DEST)
   .option("-f, --force", "Overwrite existing skill folders", false)
   .option("-y, --yes", "Skip prompts, use defaults", false)
-  .option("-s, --stack <stack>", "Filter by stack (e.g., nextjs, laravel)")
+  .option(
+    "-s, --stack <stack>",
+    "Filter by stack (comma-separated for multiple)",
+  )
   .action(async (options) => {
     printBanner();
     log.title("Initializing agent skills...");
     log.dim(`Project: ${process.cwd()}\n`);
 
     let dest = options.dest;
-    let selectedStack = options.stack;
+    let selectedStacks = options.stack
+      ? options.stack.split(",").map((s) => s.trim())
+      : null;
 
     // Stack selection prompt if not provided
-    if (!selectedStack && !options.yes) {
-      const stacks = ["all", ...getStacks()];
+    if (!selectedStacks && !options.yes) {
+      const stacks = getStacks();
       const answer = await inquirer.prompt([
         {
-          type: "list",
-          name: "stack",
-          message: "Which stack do you want to install?",
-          choices: stacks.map((s) => ({
-            name:
-              s === "all"
-                ? "All stacks"
-                : `${s} (${filterSkillsByStack(s).length} skills)`,
-            value: s,
-          })),
-          default: "all",
+          type: "checkbox",
+          name: "stacks",
+          message:
+            "Select stack(s) to install (Space to select, Enter to confirm, or select 'all')",
+          choices: [
+            {
+              name: `📦 All stacks (${SKILLS.length} skills)`,
+              value: "all",
+              checked: true,
+            },
+            new inquirer.Separator(),
+            ...stacks.map((s) => ({
+              name: `${s} (${filterSkillsByStack(s).length} skills)`,
+              value: s,
+            })),
+          ],
+          validate: (input) =>
+            input.length > 0 || "Please select at least one option",
         },
       ]);
-      selectedStack = answer.stack;
+      selectedStacks = answer.stacks;
     }
 
     // Destination prompt
@@ -129,15 +145,50 @@ program
       dest = answer.dest;
     }
 
-    const skillsToInstall = filterSkillsByStack(selectedStack);
+    let skillsToInstall = filterSkillsByStack(selectedStacks);
 
     if (skillsToInstall.length === 0) {
-      log.warn(`No skills found for stack: ${selectedStack}`);
+      log.warn(`No skills found for selected stack(s)`);
       return;
     }
 
+    // Individual skill selection (if not using --yes)
+    if (!options.yes && skillsToInstall.length > 1) {
+      const answer = await inquirer.prompt([
+        {
+          type: "checkbox",
+          name: "skills",
+          message: `Select skills to install (${skillsToInstall.length} available)`,
+          choices: [
+            {
+              name: `📦 All skills (${skillsToInstall.length})`,
+              value: "all",
+              checked: true,
+            },
+            new inquirer.Separator(),
+            ...skillsToInstall.map((s) => ({
+              name: `  ${s.id.padEnd(20)} ${chalk.dim(s.description.substring(0, 50))}`,
+              value: s.id,
+            })),
+          ],
+          validate: (input) =>
+            input.length > 0 || "Please select at least one skill",
+        },
+      ]);
+
+      if (!answer.skills.includes("all")) {
+        skillsToInstall = skillsToInstall.filter((s) =>
+          answer.skills.includes(s.id),
+        );
+      }
+    }
+
+    const stackDisplay =
+      selectedStacks && !selectedStacks.includes("all")
+        ? `[${selectedStacks.join(", ")}]`
+        : "all stacks";
     log.info(
-      `Installing ${skillsToInstall.length} skill(s)${selectedStack && selectedStack !== "all" ? ` for [${selectedStack}]` : ""}...\n`,
+      `Installing ${skillsToInstall.length} skill(s) for ${stackDisplay}...\n`,
     );
 
     let copied = 0,
