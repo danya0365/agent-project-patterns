@@ -1,5 +1,5 @@
 ---
-name: init-project
+name: nextjs-init-project
 description: >
   เริ่มต้นโปรเจคใหม่ตาม Clean Architecture pattern
   (Next.js, Supabase, Tailwind, Zustand).

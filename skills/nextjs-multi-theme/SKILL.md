@@ -1,5 +1,5 @@
 ---
-name: multi-theme-nextjs
+name: nextjs-multi-theme
 description: >
   Next.js Multi-Theme System ด้วย CSS Variables + Zustand Persist + Runtime Switching
   รองรับหลาย UI Templates (core, minimal, retro-megazine) พร้อม namespace isolation
@@ -15,6 +15,7 @@ metadata:
 Skill นี้ใช้สร้าง Next.js app ที่รองรับหลาย UI Templates พร้อม runtime theme switching ผ่าน Zustand persist
 
 **Templates ที่มี:**
+
 - `core` — อ่านง่าย เหมาะกับทุกวัย (Blue + Slate)
 - `minimal` — เรียบง่าย เน้น whitespace (Neutral)
 - `retro-megazine` — อบอุ่น editorial (Earth tones + Serif)
@@ -60,7 +61,7 @@ src/presentation/
 
 /* ❌ ผิด */
 @theme inline {
-  --color-core-primary: #2563eb;  /* hardcoded! */
+  --color-core-primary: #2563eb; /* hardcoded! */
 }
 ```
 
@@ -68,11 +69,11 @@ src/presentation/
 
 ## Namespace Convention
 
-| Template | CSS Prefix | Example |
-|----------|------------|---------|
-| core | `--core-*` | `--core-primary`, `--core-spacing-md` |
-| minimal | `--minimal-*` | `--minimal-primary`, `--minimal-font-heading` |
-| retro-megazine | `--retro-megazine-*` | `--retro-megazine-primary` |
+| Template       | CSS Prefix           | Example                                       |
+| -------------- | -------------------- | --------------------------------------------- |
+| core           | `--core-*`           | `--core-primary`, `--core-spacing-md`         |
+| minimal        | `--minimal-*`        | `--minimal-primary`, `--minimal-font-heading` |
+| retro-megazine | `--retro-megazine-*` | `--retro-megazine-primary`                    |
 
 ### Variables ที่ต้องมีในแต่ละ Template
 
@@ -98,10 +99,10 @@ src/presentation/
 
 ```typescript
 // src/presentation/stores/theme.store.ts
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export type ThemeTemplate = 'core' | 'minimal' | 'retro-megazine';
+export type ThemeTemplate = "core" | "minimal" | "retro-megazine";
 
 interface ThemeState {
   template: ThemeTemplate;
@@ -111,11 +112,11 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      template: 'core', // default
+      template: "core", // default
       setTemplate: (template) => set({ template }),
     }),
-    { name: 'theme-storage' }
-  )
+    { name: "theme-storage" },
+  ),
 );
 ```
 
@@ -124,14 +125,14 @@ export const useThemeStore = create<ThemeState>()(
 ```tsx
 // app/providers/theme-provider.tsx
 "use client";
-import { useEffect } from 'react';
-import { useThemeStore } from '@/presentation/stores/theme.store';
+import { useEffect } from "react";
+import { useThemeStore } from "@/presentation/stores/theme.store";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const template = useThemeStore((state) => state.template);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', template);
+    document.documentElement.setAttribute("data-theme", template);
   }, [template]);
 
   return <>{children}</>;
@@ -161,12 +162,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 ```tsx
 // เน้น readability, contrast สูง
-<button className="
+<button
+  className="
   bg-core-primary text-white 
   px-core-spacing-md py-2 
   rounded-md font-medium
   focus:outline-none focus:ring-2 focus:ring-core-primary/50
-">
+"
+>
   ดำเนินการ
 </button>
 ```
@@ -175,13 +178,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 ```tsx
 // เน้น whitespace, ghost buttons
-<button className="
+<button
+  className="
   border border-minimal-border 
   text-minimal-text
   px-minimal-spacing-lg py-3 
   rounded-sm
   hover:bg-minimal-surface
-">
+"
+>
   ดำเนินการ
 </button>
 ```
@@ -194,8 +199,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   หัวข้อแบบ Serif
 </h1>
 <button className="
-  bg-retro-megazine-primary text-white 
-  px-retro-spacing-md py-2 
+  bg-retro-megazine-primary text-white
+  px-retro-spacing-md py-2
   rounded-full uppercase tracking-wide font-bold
 ">
   ดำเนินการ
@@ -211,7 +216,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 1. **Namespace Match**: ใช้ CSS variables ที่ตรงกับ template ที่เลือก
 2. **No Hardcoded Colors**: ห้ามใช้ hex/rgb โดยตรงในคลาส
 3. **Dark Mode**: ต้องมี override ใน `[data-theme="X"].dark`
-4. **Accessibility**: 
+4. **Accessibility**:
    - Core template → contrast ratio 4.5:1+
    - Font size ไม่ต่ำกว่า 16px
    - Focus states ชัดเจน

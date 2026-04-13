@@ -36,6 +36,7 @@
 ## 🚀 Getting Started (การเริ่มต้นใช้งาน)
 
 ### Method 1: Local Development (Recommended)
+
 Since this project is on your local machine, use `npm link` to make it available globally:
 
 1. **In this directory:**
@@ -50,7 +51,9 @@ Since this project is on your local machine, use `npm link` to make it available
    ```
 
 ### Method 2: Immediate Execution (npx)
+
 Run without linking:
+
 ```bash
 npx /Users/marosdeeuma/agent-project-patterns init
 ```
@@ -62,6 +65,7 @@ npx /Users/marosdeeuma/agent-project-patterns init
 เพื่อให้คุณใช้งาน `@dan/agent-patterns` ได้อย่างเต็มประสิทธิภาพ นี่คือรายละเอียดเชิงลึกของทุกคำสั่งที่มีให้ใช้งานครับ:
 
 ### 1. `init` — Project Initialization 🏗️
+
 ใช้สำหรับติดตั้ง Skills ทั้งหมดเข้าสู่โปรเจคใหม่ของคุณ (Scaffold everything)
 
 ```bash
@@ -73,6 +77,7 @@ agent-patterns init -y
 ```
 
 **รายละเอียดเพิ่มเติม:**
+
 - ระบบจะใช้โฟลเดอร์มาตรฐาน **`.agents/skills/`** เป็นค่าเริ่มต้น (Recommended)
 - **Flag `-y, --yes`**: จะข้ามทุกคำถามและติดตั้งลงในโฟลเดอร์เริ่มต้นทันที
 - **Flag `-f, --force`**: ใช้สำหรับเขียนทับ (Overwrite) ไฟล์เดิมในโฟลเดอร์ปลายทาง
@@ -81,6 +86,7 @@ agent-patterns init -y
 ---
 
 ### 2. `add [id]` — Add Specific Skill ➕
+
 ใช้สำหรับเลือกติดตั้งเฉพาะ Skill ที่ต้องการ (Selective installation)
 
 ```bash
@@ -93,12 +99,14 @@ agent-patterns add repo
 ```
 
 **รายละเอียดเพิ่มเติม:**
+
 - หากไม่ระบุ `id` ตัวโปรแกรมจะแสดงรายการ Skill ทั้งหมดที่มีให้คุณเลือก
 - เหมาะสำหรับกรณีที่คุณมีโปรเจคอยู่แล้ว และต้องการเพิ่มเฉพาะความสามารถใหม่ๆ เข้าไป
 
 ---
 
 ### 3. `check` — Version Validation 🔍
+
 ตรวจสอบความสดใหม่ของไฟล์ Skills ในโปรเจคของคุณ เทียบกับต้นฉบับ (Local Master)
 
 ```bash
@@ -106,6 +114,7 @@ agent-patterns check
 ```
 
 **รายละเอียดเพิ่มเติม:**
+
 - ระบบจะสแกนหาโฟลเดอร์มาตรฐานในโปรเจคของคุณอัตโนมัติ
 - **สัญลักษณ์ที่ปรากฏ:**
   - `✓` : ไฟล์ตรงกับต้นฉบับ (Up to date)
@@ -115,6 +124,7 @@ agent-patterns check
 ---
 
 ### 4. `update` — Synchronize Skills 🔄
+
 ซิงค์ข้อมูลใหม่ล่าสุดจากโฟลเดอร์ `skills/` ในเครื่องคุณ เข้าสู่โปรเจคที่กำลังทำงานอยู่
 
 ```bash
@@ -122,12 +132,14 @@ agent-patterns update
 ```
 
 **รายละเอียดเพิ่มเติม:**
+
 - คำสั่งนี้จะทำการ **Overwrite** ไฟล์ที่ล้าสมัยให้กลายเป็นเวอร์ชันล่าสุดทันที
 - เมื่อคุณแก้ไข "ทักษะ" ที่โปรเจคต้นฉบับเสร็จแล้ว รันคำสั่งนี้เพื่อให้ AI ทุกตัวเก่งขึ้นพร้อมกันครับ
 
 ---
 
 ### 5. `list` — Registry Overview 📋
+
 ดูรายการ Skills ทั้งหมดที่ระบบรองรับในปัจจุบัน
 
 ```bash
@@ -142,10 +154,19 @@ agent-patterns list
 
 ```text
 📁 .agents/skills/
-   📁 create-page/
+   📁 nextjs-create-page/
       ├── SKILL.md           # AI instructions (YAML + Instructions)
       └── references/        # Deep-dive templates & examples
-   📁 create-repo/
+   📁 nextjs-create-repo/
+      ├── SKILL.md
+      └── references/
+   📁 nextjs-init-project/
+      ├── SKILL.md
+      └── references/
+   📁 nextjs-theme-css/
+      ├── SKILL.md
+      └── references/
+   📁 nextjs-multi-theme/
       ├── SKILL.md
       └── references/
 ```
@@ -156,10 +177,22 @@ agent-patterns list
 
 ## 📝 รายการ Skills ที่มีจำหน่าย (Registry)
 
-| ID | คำอธิบาย |
-|----|----------|
-| `create-page` | โครงสร้าง Page (Repository → Presenter → View) |
-| `create-repo` | โครงสร้าง Data Layer (Interface → Implementation) |
+### Next.js Stack
+
+| ID                    | คำอธิบาย                                      |
+| --------------------- | --------------------------------------------- |
+| `nextjs-init-project` | เริ่มต้นโปรเจค Next.js ใหม่                   |
+| `nextjs-create-page`  | สร้าง Page (Repository → Presenter → View)    |
+| `nextjs-create-repo`  | สร้าง Data Layer (Interface → Implementation) |
+| `nextjs-theme-css`    | กฎการเขียน CSS Theme Variables                |
+| `nextjs-multi-theme`  | Multi-Theme System ด้วย Zustand               |
+
+### กฎการตั้งชื่อ (Naming Convention)
+
+ใช้ pattern: `[stack]-[action]-[target]`
+
+- `nextjs-*` — Skills สำหรับ Next.js
+- `laravel-*` — Skills สำหรับ Laravel (coming soon)
 
 ---
 

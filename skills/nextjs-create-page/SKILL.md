@@ -1,5 +1,5 @@
 ---
-name: create-page
+name: nextjs-create-page
 description: >
   สร้าง page ใหม่ใน Next.js ตาม Clean Architecture pattern
   (Repository Interface → Mock → Presenter → View).
@@ -31,13 +31,13 @@ references/CREATE_PAGE_PATTERN.md
 
 ## Placeholder ที่ต้องแทนที่
 
-| Placeholder | รูปแบบ | ตัวอย่าง |
-|---|---|---|
-| `[PageName]` | PascalCase | `Customers` |
-| `[page-name]` | kebab-case | `customers` |
-| `[PageItem]` | PascalCase | `Customer` |
-| `[PAGE_ITEMS]` | SCREAMING_SNAKE | `CUSTOMERS` |
-| `[PageThaiName]` | ภาษาไทย | `ลูกค้า` |
+| Placeholder      | รูปแบบ          | ตัวอย่าง    |
+| ---------------- | --------------- | ----------- |
+| `[PageName]`     | PascalCase      | `Customers` |
+| `[page-name]`    | kebab-case      | `customers` |
+| `[PageItem]`     | PascalCase      | `Customer`  |
+| `[PAGE_ITEMS]`   | SCREAMING_SNAKE | `CUSTOMERS` |
+| `[PageThaiName]` | ภาษาไทย         | `ลูกค้า`    |
 
 ## Mock-First Workflow (แนะนำ)
 

@@ -1,5 +1,5 @@
 ---
-name: css-theme-variables
+name: nextjs-theme-css
 description: >
   กฎการเขียน CSS และจัดการ Theme Variables สำหรับ Next.js + Tailwind v4.
   ใช้เมื่อต้องการสร้างหรือแก้ไข theme.css และระบบ design tokens.
@@ -112,19 +112,19 @@ public/styles/
 
 ## Naming Convention
 
-| Prefix | ใช้ใน | ตัวอย่าง |
-|--------|-------|---------|
-| `--background` | Semantic colors | `--background`, `--foreground` |
-| `--brand-*` | Brand colors scale | `--brand-500` |
-| `--surface-*` | Neutral scale | `--surface-100`, `--surface-800` |
-| `--color-*` | Tailwind v4 theme | `--color-brand-500`, `--color-surface-100` |
+| Prefix         | ใช้ใน              | ตัวอย่าง                                   |
+| -------------- | ------------------ | ------------------------------------------ |
+| `--background` | Semantic colors    | `--background`, `--foreground`             |
+| `--brand-*`    | Brand colors scale | `--brand-500`                              |
+| `--surface-*`  | Neutral scale      | `--surface-100`, `--surface-800`           |
+| `--color-*`    | Tailwind v4 theme  | `--color-brand-500`, `--color-surface-100` |
 
 ## Usage Pattern
 
 ```css
 /* ใน base.css หรือ components.css */
 body {
-  background-color: var(--background);  /* ใช้ตัวแปร :root โดยตรง */
+  background-color: var(--background); /* ใช้ตัวแปร :root โดยตรง */
   color: var(--foreground);
 }
 ```

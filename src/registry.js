@@ -6,35 +6,36 @@
 
 export const SKILLS = [
   {
-    id: "create-page",
-    folder: "create-page",
+    id: "nextjs-create-page",
+    folder: "nextjs-create-page",
     description:
-      "สร้าง page ใหม่ตาม Clean Architecture (Repository → Presenter → View)",
-    tags: ["page", "presenter", "repository", "view"],
+      "สร้าง page ใหม่ตาม Clean Architecture สำหรับ Next.js (Repository → Presenter → View)",
+    tags: ["nextjs", "page", "presenter", "repository", "view"],
   },
   {
-    id: "create-repo",
-    folder: "create-repo",
-    description: "สร้าง Repository ใหม่ (Interface → Mock → Supabase → API)",
-    tags: ["repository", "supabase", "mock", "api"],
-  },
-  {
-    id: "init-project",
-    folder: "init-project",
+    id: "nextjs-create-repo",
+    folder: "nextjs-create-repo",
     description:
-      "เริ่มต้นโปรเจคใหม่ตาม Clean Architecture (Next.js, Supabase, Tailwind, Zustand)",
-    tags: ["init", "setup", "architecture", "nextjs"],
+      "สร้าง Repository ใหม่สำหรับ Next.js (Interface → Mock → Supabase → API)",
+    tags: ["nextjs", "repository", "supabase", "mock", "api"],
   },
   {
-    id: "css-theme-variables",
-    folder: "css-theme-variables",
+    id: "nextjs-init-project",
+    folder: "nextjs-init-project",
     description:
-      "กฎการเขียน CSS Theme Variables (Next.js + Tailwind v4) - :root → .dark → @theme",
-    tags: ["css", "theme", "tailwind", "variables", "dark-mode"],
+      "เริ่มต้นโปรเจค Next.js ใหม่ตาม Clean Architecture (Supabase, Tailwind, Zustand)",
+    tags: ["nextjs", "init", "setup", "architecture"],
   },
   {
-    id: "multi-theme-nextjs",
-    folder: "multi-theme-nextjs",
+    id: "nextjs-theme-css",
+    folder: "nextjs-theme-css",
+    description:
+      "กฎการเขียน CSS Theme Variables สำหรับ Next.js + Tailwind v4 - :root → .dark → @theme",
+    tags: ["nextjs", "css", "theme", "tailwind", "variables", "dark-mode"],
+  },
+  {
+    id: "nextjs-multi-theme",
+    folder: "nextjs-multi-theme",
     description:
       "Next.js Multi-Theme System ด้วย CSS Variables + Zustand + Runtime Switching (core, minimal, retro-megazine)",
     tags: [
