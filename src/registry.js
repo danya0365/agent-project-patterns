@@ -46,6 +46,13 @@ export const SKILLS = [
       "runtime-switching",
     ],
   },
+  {
+    id: "nextjs-supabase-repo-pattern",
+    folder: "nextjs-supabase-repo-pattern",
+    description:
+      "Supabase Repository Pattern ด้วย Abstract Base + Role Split (UserRepo / AdminRepo)",
+    tags: ["nextjs", "supabase", "repository", "abstract-base", "role-split"],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
