@@ -53,6 +53,20 @@ export const SKILLS = [
       "Supabase Repository Pattern ด้วย Abstract Base + Role Split (UserRepo / AdminRepo)",
     tags: ["nextjs", "supabase", "repository", "abstract-base", "role-split"],
   },
+  {
+    id: "nextjs-demo-flow",
+    folder: "nextjs-demo-flow",
+    description:
+      "สร้างระบบ Demo Flow สำหรับนำเสนอโปรเจคให้ลูกค้า (Groups → Scenarios → Journeys + Presentation Mode)",
+    tags: [
+      "nextjs",
+      "demo-flow",
+      "presentation",
+      "scenarios",
+      "journeys",
+      "mock-pages",
+    ],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
