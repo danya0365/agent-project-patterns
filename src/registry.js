@@ -67,6 +67,13 @@ export const SKILLS = [
       "mock-pages",
     ],
   },
+  {
+    id: "nextjs-use-case-pattern",
+    folder: "nextjs-use-case-pattern",
+    description:
+      "เพิ่ม Use Case layer ระหว่าง Repository และ Presenter เพื่อให้ business logic ร่วมใช้ได้หลาย page/context",
+    tags: ["nextjs", "clean-architecture", "use-case", "presenter", "refactor"],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
