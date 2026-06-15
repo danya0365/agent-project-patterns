@@ -74,6 +74,20 @@ export const SKILLS = [
       "เพิ่ม Use Case layer ระหว่าง Repository และ Presenter เพื่อให้ business logic ร่วมใช้ได้หลาย page/context",
     tags: ["nextjs", "clean-architecture", "use-case", "presenter", "refactor"],
   },
+  {
+    id: "nextjs-clean-arch-drizzle",
+    folder: "nextjs-clean-arch-drizzle",
+    description:
+      "โครงสร้าง Clean Architecture แบบ Next.js + Turso/Drizzle (DI container → Repository → Use Case → Server Action, custom session auth)",
+    tags: [
+      "nextjs",
+      "clean-architecture",
+      "drizzle",
+      "turso",
+      "di-container",
+      "server-actions",
+    ],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
