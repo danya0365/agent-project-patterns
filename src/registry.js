@@ -110,6 +110,21 @@ export const SKILLS = [
       "ตั้งระบบ versioning แบบ feature-based SemVer + version แหล่งเดียวใน package.json + npm version hook (CHANGELOG) + ฝัง version ลง footer พร้อม commit sha",
     tags: ["nextjs", "versioning", "semver", "release", "changelog"],
   },
+  {
+    id: "nextjs-saas-starter",
+    folder: "nextjs-saas-starter",
+    description:
+      "ใช้ repo saas-starter (Next.js 16 + Turso/Drizzle + Clean Architecture) เป็นจุดเริ่ม SaaS ใหม่ — auth/2FA, security/audit, multi-tenant, billing, notification, theme พร้อมใช้ + ฟีเจอร์ตัวอย่าง items ให้ลอกสร้างโดเมนใหม่",
+    tags: [
+      "nextjs",
+      "saas",
+      "starter",
+      "boilerplate",
+      "multi-tenant",
+      "clean-architecture",
+      "drizzle",
+    ],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
