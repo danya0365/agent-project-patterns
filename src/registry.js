@@ -88,6 +88,28 @@ export const SKILLS = [
       "server-actions",
     ],
   },
+  {
+    id: "nextjs-semantic-theme",
+    folder: "nextjs-semantic-theme",
+    description:
+      "Next.js gen-3 theming: shared semantic tokens สลับด้วย [data-theme] + per-theme dark (ramp inversion) + status/accent/on-brand + per-theme fonts + Zustand persist/FOUC script",
+    tags: [
+      "nextjs",
+      "theme",
+      "tailwind",
+      "semantic-tokens",
+      "dark-mode",
+      "zustand",
+      "multi-theme",
+    ],
+  },
+  {
+    id: "nextjs-versioning",
+    folder: "nextjs-versioning",
+    description:
+      "ตั้งระบบ versioning แบบ feature-based SemVer + version แหล่งเดียวใน package.json + npm version hook (CHANGELOG) + ฝัง version ลง footer พร้อม commit sha",
+    tags: ["nextjs", "versioning", "semver", "release", "changelog"],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 

@@ -186,6 +186,7 @@ agent-patterns list
 | `nextjs-create-repo`  | สร้าง Data Layer (Interface → Implementation) |
 | `nextjs-theme-css`    | กฎการเขียน CSS Theme Variables                |
 | `nextjs-multi-theme`  | Multi-Theme System ด้วย Zustand               |
+| `nextjs-semantic-theme` | Theming gen-3: semantic tokens + per-theme dark + runtime switch |
 
 ### กฎการตั้งชื่อ (Naming Convention)
 
