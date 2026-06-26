@@ -187,6 +187,8 @@ agent-patterns list
 | `nextjs-theme-css`    | กฎการเขียน CSS Theme Variables                |
 | `nextjs-multi-theme`  | Multi-Theme System ด้วย Zustand               |
 | `nextjs-semantic-theme` | Theming gen-3: semantic tokens + per-theme dark + runtime switch |
+| `nextjs-hexagonal-repo` | Data-access hexagonal: ports & adapters + Result + role-split + contract test |
+| `nextjs-monorepo-versioning` | Feature SemVer สำหรับ monorepo (pnpm + Turborepo) + version/sha footer |
 
 ### กฎการตั้งชื่อ (Naming Convention)
 

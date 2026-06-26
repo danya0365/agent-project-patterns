@@ -125,6 +125,36 @@ export const SKILLS = [
       "drizzle",
     ],
   },
+  {
+    id: "nextjs-hexagonal-repo",
+    folder: "nextjs-hexagonal-repo",
+    description:
+      "Data-access แบบ hexagonal (ports & adapters) + Result<T> ไม่ throw + role-split (User RLS / Admin service-role) + contract test (describe.each) — วิวัฒนาการ testability-first ของ supabase-repo-pattern",
+    tags: [
+      "nextjs",
+      "supabase",
+      "hexagonal",
+      "ports-adapters",
+      "result-type",
+      "role-split",
+      "contract-test",
+    ],
+  },
+  {
+    id: "nextjs-monorepo-versioning",
+    folder: "nextjs-monorepo-versioning",
+    description:
+      "Feature-based SemVer สำหรับ monorepo (pnpm + Turborepo) — version แหล่งเดียวที่แอป deploy + ฝัง version/sha ลง footer + release ผ่าน pnpm version (ฉบับ monorepo ของ nextjs-versioning)",
+    tags: [
+      "nextjs",
+      "versioning",
+      "semver",
+      "monorepo",
+      "pnpm",
+      "turborepo",
+      "release",
+    ],
+  },
   // ➕ เพิ่ม skill ใหม่ตรงนี้
 ];
 
